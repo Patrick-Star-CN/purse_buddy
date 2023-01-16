@@ -1,4 +1,4 @@
-package team.delete.PurseBuddy;
+package team.delete.pursebuddy;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

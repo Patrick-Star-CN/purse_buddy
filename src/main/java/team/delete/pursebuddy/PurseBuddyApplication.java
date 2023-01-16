@@ -1,8 +1,11 @@
-package team.delete.PurseBuddy;
+package team.delete.pursebuddy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author PatrickStar
+ */
 @SpringBootApplication
 public class PurseBuddyApplication {
 
