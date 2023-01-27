@@ -12,19 +12,33 @@ import java.util.List;
  */
 @Component
 public class MsgRedisConstant {
-    // 用户接收消息队列
+    /**
+     * 用户接收消息队列
+     */
     public static final String USER_MSG_QUEUE = "u:{%d}:m:in";
-    // 消息
+    /**
+     * 消息
+     */
     public static final String MSG = "msg:{%s}";
-    // 用户已读消息
+    /**
+     * 用户已读消息
+     */
     public static final String USER_READ_MSG = "u:{%d}:m:read";
-    // 用户未读消息
+    /**
+     * 用户未读消息
+     */
     public static final String USER_UNREAD_MSG = "u:{%d}:m:ur";
-    // 用户发送消息
+    /**
+     * 用户发送消息
+     */
     public static final String USER_SENT_MSG = "u:{%d}:m:out";
-    // 用户消息队列长度
+    /**
+     * 用户消息队列长度
+     */
     public static final String USER_MSG_QUEUE_COUNT = "u:{%d}:m:in:ct";
-    // 用户未读队列长度
+    /**
+     * 用户未读队列长度
+     */
     public static final String USER_UNREAD_MSG_COUNT = "u:{%d}:m:ur:ct";
 
     public static final List<Object> MESSAGE_OUTLINE_KEYS = Arrays.asList("sendTime", "title", "senderName");

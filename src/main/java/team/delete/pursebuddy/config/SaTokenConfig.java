@@ -23,7 +23,10 @@ public class SaTokenConfig implements WebMvcConfigurer {
         registry.addInterceptor(new SaInterceptor(handler -> {
             // 根据路由划分模块，不同模块不同鉴权
             SaRouter.match("/api/**", StpUtil::checkLogin);
-        })).addPathPatterns("/api/**").excludePathPatterns("/api/sa/**", "/api/test/**", "/api/common/**");
+        })).addPathPatterns("/api/**")
+           .excludePathPatterns("/api/user/login/**",
+                                "/api/user/register",
+                                "/api/user/test/login/**");
 
         registry.addInterceptor(new SaInterceptor()).addPathPatterns("/**");
     }

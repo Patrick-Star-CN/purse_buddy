@@ -11,13 +11,12 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum CacheType {
+    /** 永久 */
     NoExpire(100, 3000, false,-1),
+    /** 一分钟存活期 */
     ExpireOneMin(100, 1000, true, 60),
-    Captcha(100, 3000, true, 60),
-    SMS(100, 3000, true, 300),
-    Roles(100, 3000, false, -1),
-    Message(1000, 10000, false, -1),
-    Permissions(100, 3000, false, -1);
+    /** 验证码 */
+    Captcha(100, 3000, true, 60);
 
     private final int initialCapacity;
     private final int maximumSize;

@@ -1,6 +1,3 @@
-server:
-  port: 8080
-
 sa-token:
   token-name: pb-token
   timeout: 604800
@@ -13,7 +10,7 @@ sa-token:
 
 spring:
   profiles:
-    active: dev
+    active: debug
   data:
     redis:
       database: 0

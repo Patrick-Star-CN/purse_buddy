@@ -12,7 +12,7 @@ import team.delete.pursebuddy.constant.ResponseCode;
 @AllArgsConstructor
 public class AjaxResult<T> {
     private Integer code;
-    private String message;
+    private String msg;
     private T data;
 
     public static <N> AjaxResult<N> SUCCESS() { return new AjaxResult<>(ResponseCode.SUCCESS.getCode(), "success",null); }
