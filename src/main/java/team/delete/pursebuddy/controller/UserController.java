@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * @author Patrick_Star
- * @version 1.0
+ * @version 1.1
  */
 @Validated
 @RestController
@@ -62,10 +62,13 @@ public class UserController {
      */
     @ResponseBody
     @GetMapping("/register")
-    public Object registerByWechat(@RequestParam(value = "code") String code,
-                                   @RequestParam(value = "username") String username) {
+    public Object registerByWechat(
+            @RequestParam(value = "code") String code,
+            @RequestParam(value = "username") String username,
+            @RequestParam(value = "gender") String gender,
+            @RequestParam(value = "birthday") String birthday) {
         String openId = weChatService.code2Session(code).getOpenId();
-        int userId = userService.insert(username, openId);
+        int userId = userService.insert(username, openId, gender, birthday);
         StpUtil.login(userId);
         return AjaxResult.SUCCESS();
     }
@@ -111,7 +114,7 @@ public class UserController {
      * @return json数据，包含状态码和状态信息
      */
     @GetMapping("/change/birthday")
-    public Object modifyStudentBirthday(@RequestParam String birthday)  {
+    public Object modifyStudentBirthday(@RequestParam String birthday) {
         int userId = StpUtil.getLoginIdAsInt();
         userInfoService.updateInfo(userId, null, birthday);
         return AjaxResult.SUCCESS();

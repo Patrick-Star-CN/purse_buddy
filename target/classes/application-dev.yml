@@ -17,7 +17,7 @@ spring:
     baseline-on-migrate: true
 
   datasource:
-    url: jdbc:mysql://localhost:3306/pb_db?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/pb_db?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: root
     password: 123456
 

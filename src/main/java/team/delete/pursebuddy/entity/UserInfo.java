@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * @author Patrick_Star
- * @version 1.0
+ * @version 1.1
  */
 @Data
 @Builder
@@ -16,7 +16,7 @@ public class UserInfo {
      * 用户id
      */
     @TableId(type = IdType.NONE)
-    int userId;
+    Integer userId;
     /**
      * 性别
      */

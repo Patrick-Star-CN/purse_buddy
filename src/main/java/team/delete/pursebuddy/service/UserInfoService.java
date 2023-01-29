@@ -9,18 +9,16 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import team.delete.pursebuddy.constant.ErrorCode;
-import team.delete.pursebuddy.entity.User;
+import team.delete.pursebuddy.constant.RegexPattern;
 import team.delete.pursebuddy.entity.UserInfo;
 import team.delete.pursebuddy.exception.AppException;
 import team.delete.pursebuddy.mapper.UserInfoMapper;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.regex.Pattern;
 
 /**
  * @author Patrick_Star
- * @version 1.1
+ * @version 1.2
  */
 @Service
 @RequiredArgsConstructor
@@ -32,19 +30,18 @@ public class UserInfoService {
     /**
      * 通过 ID 查询用户信息
      */
-    @Cacheable(key = "'user_info_'+#userId")
+    @Cacheable(value = "ExpireOneMin", key = "'user_info_'+#userId")
     public UserInfo getById(int userId) {
         return userInfoMapper.selectOne(new QueryWrapper<UserInfo>().eq("user_id", userId));
     }
 
+    /**
+     * 更新用户信息
+     */
     @CacheEvict(value = "NoExpire", key = "'user_info_'+#userId")
     @Transactional(rollbackFor = Exception.class)
     public void updateInfo(int userId, String gender, String birthday) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date birthdayDt;
-        try {
-            birthdayDt = birthday == null ? null : simpleDateFormat.parse(birthday);
-        } catch (ParseException e) {
+        if (birthday != null && !Pattern.matches(RegexPattern.DATE, birthday)) {
             throw new AppException(ErrorCode.PARAM_ERROR);
         }
         if (gender != null && !"男".equals(gender) && !"女".equals(gender)) {
@@ -53,7 +50,7 @@ public class UserInfoService {
         UpdateWrapper<UserInfo> wrapper = new UpdateWrapper<>();
         wrapper.eq("user_id", userId)
                 .set(gender != null, "gender", gender)
-                .set(birthdayDt != null, "birthday", birthdayDt);
+                .set(birthday != null, "birthday", birthday);
         userInfoMapper.update(null, wrapper);
     }
 }
