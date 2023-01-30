@@ -19,7 +19,7 @@ import java.util.*;
 
 /**
  * @author Patrick_Star
- * @version 1.0
+ * @version 1.1
  */
 @Service
 @RequiredArgsConstructor
@@ -93,16 +93,16 @@ public class ExpensesRecordService {
         Date startTime = null;
         Date endTime = null;
         try {
-            if (date != null) {
+            if (!"".equals(date)) {
                 startTime = TimeUtil.tranStringToDate(date);
-            } else if (month != null) {
+            } else if (!"".equals(month)) {
                 startTime = TimeUtil.tranStringToDate(month + "-01");
                 endTime = TimeUtil.tranStringToDate(month + "-01");
                 Calendar endCalendar = Calendar.getInstance();
                 endCalendar.setTime(endTime);
                 endCalendar.add(Calendar.MONTH,1);
                 endTime = endCalendar.getTime();
-            } else if (year != null) {
+            } else if (!"".equals(year)) {
                 startTime = TimeUtil.tranStringToDate(year + "-01-01");
                 endTime = TimeUtil.tranStringToDate(year + "-01-01");
                 Calendar endCalendar = Calendar.getInstance();
@@ -111,6 +111,7 @@ public class ExpensesRecordService {
                 endTime = endCalendar.getTime();
             }
         } catch (ParseException e) {
+            e.printStackTrace();
             throw new AppException(ErrorCode.PARAM_ERROR);
         }
         IPage<ExpensesRecord> page = new Page<>(offset, pageSize);

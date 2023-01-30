@@ -10,7 +10,7 @@ import team.delete.pursebuddy.service.ExpensesRecordService;
 
 /**
  * @author Patrick_Star
- * @version 1.0
+ * @version 1.1
  */
 @Validated
 @RestController
@@ -43,7 +43,7 @@ public class ExpensesRecordController {
      */
     @DeleteMapping("/delete/{id}")
     public Object delete(@PathVariable int id) {
-        expensesRecordService.delete(StpUtil.getLoginIdAsInt(), id);
+        expensesRecordService.delete(id, StpUtil.getLoginIdAsInt());
         return AjaxResult.SUCCESS();
     }
 
