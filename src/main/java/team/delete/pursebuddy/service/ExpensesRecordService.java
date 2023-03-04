@@ -19,7 +19,7 @@ import java.util.*;
 
 /**
  * @author Patrick_Star
- * @version 1.1
+ * @version 1.2
  */
 @Service
 @RequiredArgsConstructor
@@ -49,16 +49,16 @@ public class ExpensesRecordService {
      * 判断该用户是否有管理该消费记录的权限
      */
     @Cacheable(value = "ExpireOneMin", key = "'not_exist_'+#id")
-    public boolean exist(int id, int userId) {
+    public boolean hasNotPermission(int id, int userId) {
         Long count = expensesRecordMapper.selectCount(new QueryWrapper<ExpensesRecord>().eq("id", id).eq("user_id", userId));
-        return count != 0;
+        return count == 0;
     }
 
     /**
      * 删除消费记录
      */
     public void delete(int id, int userId) {
-        if (!exist(id, userId)) {
+        if (hasNotPermission(id, userId)) {
             throw new AppException(ErrorCode.PARAM_ERROR);
         }
         expensesRecordMapper.delete(new QueryWrapper<ExpensesRecord>().eq("id", id));
@@ -68,7 +68,7 @@ public class ExpensesRecordService {
      * 修改消费记录
      */
     public void update(Integer id, int userId, int value, boolean type, String kind, String dateRaw) {
-        if (id == null || !exist(id, userId)) {
+        if (id == null || hasNotPermission(id, userId)) {
             throw new AppException(ErrorCode.PARAM_ERROR);
         }
         Date date;

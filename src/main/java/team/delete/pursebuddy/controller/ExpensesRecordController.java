@@ -7,10 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import team.delete.pursebuddy.dto.AjaxResult;
 import team.delete.pursebuddy.dto.ExpensesRecordDto;
 import team.delete.pursebuddy.service.ExpensesRecordService;
+import team.delete.pursebuddy.service.TextInService;
+
+import java.util.Map;
 
 /**
  * @author Patrick_Star
- * @version 1.1
+ * @version 1.2
  */
 @Validated
 @RestController
@@ -18,6 +21,7 @@ import team.delete.pursebuddy.service.ExpensesRecordService;
 @RequiredArgsConstructor
 public class ExpensesRecordController {
     final ExpensesRecordService expensesRecordService;
+    final TextInService textInService;
 
     /**
      * 添加新的消费记录
@@ -86,4 +90,18 @@ public class ExpensesRecordController {
         return AjaxResult.SUCCESS(expensesRecordService.getPageable(StpUtil.getLoginIdAsInt(),
                 year, month, date, type, pageNum, pageSize));
     }
+
+    /**
+     * 通过识别火车票添加新的消费记录
+     *
+     * @param map 传输图片数据的 body
+     * @return json数据，包含状态码和状态信息
+     */
+    @PostMapping("/train_ticket")
+    public Object insertByPhoto(@RequestBody Map<String, Object> map) {
+        textInService.insertByTrainTicket(StpUtil.getLoginIdAsInt(),
+                ((String) map.get("photo")).getBytes());
+        return AjaxResult.SUCCESS();
+    }
+
 }
