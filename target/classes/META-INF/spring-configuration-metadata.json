@@ -1,0 +1,16 @@
+{
+  "groups": [
+    {
+      "name": "wechat",
+      "type": "team.delete.pursebuddy.config.WechatConfig",
+      "sourceType": "team.delete.pursebuddy.config.WechatConfig"
+    },
+    {
+      "name": "x-ti",
+      "type": "team.delete.pursebuddy.config.XTiConfig",
+      "sourceType": "team.delete.pursebuddy.config.XTiConfig"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

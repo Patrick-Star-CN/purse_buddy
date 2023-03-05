@@ -6,21 +6,23 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Builder;
 import lombok.Data;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 
 /**
  * @author Patrick_Star
- * @version 1.0
+ * @version 1.2
  */
 @Data
 @Builder
-public class ExpensesRecord {
+public class ExpensesRecord implements Comparable<ExpensesRecord> {
     /**
      * 消费记录id
      */
     @TableId(type = IdType.AUTO)
     Integer id;
+
     /**
      * 用户id
      */
@@ -28,7 +30,7 @@ public class ExpensesRecord {
     /**
      * 消费金额
      */
-    Integer value;
+    Double value;
     /**
      * 收支类型(0: 收入; 1: 支出）
      */
@@ -39,7 +41,22 @@ public class ExpensesRecord {
      */
     String kind;
     /**
+     * 备注
+     */
+    String remark;
+    /**
      * 消费日期
      */
     Date date;
+
+    @Override
+    public int compareTo(@NotNull ExpensesRecord rhs) {
+        if (date.after(rhs.date)) {
+            return -1;
+        } else if (date.before(rhs.date)) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }

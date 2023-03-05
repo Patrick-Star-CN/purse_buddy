@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * @author Patrick_Star
- * @version 1.1
+ * @version 1.2
  */
 @Data
 @Builder

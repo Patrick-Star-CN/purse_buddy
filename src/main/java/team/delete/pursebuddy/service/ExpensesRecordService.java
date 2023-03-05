@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import team.delete.pursebuddy.constant.ErrorCode;
 import team.delete.pursebuddy.entity.ExpensesRecord;
@@ -30,7 +31,7 @@ public class ExpensesRecordService {
     /**
      * 新增消费记录
      */
-    public void insert(int userId, int value, boolean type, String kind, String dateRaw) {
+    public int insert(int userId, double value, boolean type, String kind, String remark, String dateRaw) {
         Date date;
         try {
             date = TimeUtil.tranStringToDate(dateRaw);
@@ -41,14 +42,16 @@ public class ExpensesRecordService {
                 .kind(kind)
                 .value(value)
                 .date(date)
+                .remark(remark)
                 .type(type).build();
         expensesRecordMapper.insert(expensesRecord);
+        return expensesRecord.getId();
     }
 
     /**
      * 判断该用户是否有管理该消费记录的权限
      */
-    @Cacheable(value = "ExpireOneMin", key = "'not_exist_'+#id")
+    @Cacheable(value = "ExpireOneMin", key = "'not_exist_'+#id+#userId")
     public boolean hasNotPermission(int id, int userId) {
         Long count = expensesRecordMapper.selectCount(new QueryWrapper<ExpensesRecord>().eq("id", id).eq("user_id", userId));
         return count == 0;
@@ -67,7 +70,7 @@ public class ExpensesRecordService {
     /**
      * 修改消费记录
      */
-    public void update(Integer id, int userId, int value, boolean type, String kind, String dateRaw) {
+    public void update(Integer id, int userId, double value, boolean type, String kind, String dateRaw) {
         if (id == null || hasNotPermission(id, userId)) {
             throw new AppException(ErrorCode.PARAM_ERROR);
         }
@@ -100,14 +103,14 @@ public class ExpensesRecordService {
                 endTime = TimeUtil.tranStringToDate(month + "-01");
                 Calendar endCalendar = Calendar.getInstance();
                 endCalendar.setTime(endTime);
-                endCalendar.add(Calendar.MONTH,1);
+                endCalendar.add(Calendar.MONTH, 1);
                 endTime = endCalendar.getTime();
             } else if (!"".equals(year)) {
                 startTime = TimeUtil.tranStringToDate(year + "-01-01");
                 endTime = TimeUtil.tranStringToDate(year + "-01-01");
                 Calendar endCalendar = Calendar.getInstance();
                 endCalendar.setTime(endTime);
-                endCalendar.add(Calendar.YEAR,1);
+                endCalendar.add(Calendar.YEAR, 1);
                 endTime = endCalendar.getTime();
             }
         } catch (ParseException e) {
@@ -121,6 +124,7 @@ public class ExpensesRecordService {
         queryWrapper.ge(startTime != null, "date", startTime);
         queryWrapper.lt(endTime != null, "date", endTime);
         expensesRecordMapper.selectPage(page, queryWrapper);
+        Collections.sort(page.getRecords());
         Map<String, Object> res = new HashMap<>(4);
         res.put("pageNumber", offset);
         res.put("pageSize", pageSize);

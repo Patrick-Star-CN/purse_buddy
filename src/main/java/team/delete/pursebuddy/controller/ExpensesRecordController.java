@@ -4,12 +4,13 @@ import cn.dev33.satoken.stp.StpUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import team.delete.pursebuddy.dto.AjaxResult;
 import team.delete.pursebuddy.dto.ExpensesRecordDto;
 import team.delete.pursebuddy.service.ExpensesRecordService;
 import team.delete.pursebuddy.service.TextInService;
 
-import java.util.Map;
+import java.io.IOException;
 
 /**
  * @author Patrick_Star
@@ -31,12 +32,12 @@ public class ExpensesRecordController {
      */
     @PostMapping("/insert")
     public Object insert(@RequestBody ExpensesRecordDto expensesRecordDto) {
-        expensesRecordService.insert(StpUtil.getLoginIdAsInt(),
-                expensesRecordDto.getValue(),
+        return AjaxResult.SUCCESS(expensesRecordService.insert(StpUtil.getLoginIdAsInt(),
+                Double.parseDouble(expensesRecordDto.getValue()),
                 expensesRecordDto.getType(),
                 expensesRecordDto.getKind(),
-                expensesRecordDto.getDate());
-        return AjaxResult.SUCCESS();
+                expensesRecordDto.getRemark(),
+                expensesRecordDto.getDate()));
     }
 
     /**
@@ -61,7 +62,7 @@ public class ExpensesRecordController {
     public Object update(@RequestBody ExpensesRecordDto expensesRecordDto) {
         expensesRecordService.update(expensesRecordDto.getId(),
                 StpUtil.getLoginIdAsInt(),
-                expensesRecordDto.getValue(),
+                Double.parseDouble(expensesRecordDto.getValue()),
                 expensesRecordDto.getType(),
                 expensesRecordDto.getKind(),
                 expensesRecordDto.getDate());
@@ -94,14 +95,13 @@ public class ExpensesRecordController {
     /**
      * 通过识别火车票添加新的消费记录
      *
-     * @param map 传输图片数据的 body
+     * @param photo 图片文件
      * @return json数据，包含状态码和状态信息
      */
     @PostMapping("/train_ticket")
-    public Object insertByPhoto(@RequestBody Map<String, Object> map) {
-        textInService.insertByTrainTicket(StpUtil.getLoginIdAsInt(),
-                ((String) map.get("photo")).getBytes());
-        return AjaxResult.SUCCESS();
+    public Object insertByPhoto(@RequestParam("photo") MultipartFile photo) throws IOException {
+        return AjaxResult.SUCCESS(textInService.insertByTrainTicket(StpUtil.getLoginIdAsInt(),
+                photo.getBytes()));
     }
 
 }
