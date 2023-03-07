@@ -10,7 +10,7 @@ sa-token:
 
 spring:
   profiles:
-    active: debug
+    active: dev
   data:
     redis:
       database: 0

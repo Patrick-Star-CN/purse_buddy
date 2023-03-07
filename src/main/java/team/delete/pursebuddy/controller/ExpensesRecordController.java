@@ -30,10 +30,11 @@ public class ExpensesRecordController {
      * @param expensesRecordDto 新建消费记录有关数据
      * @return json数据，包含状态码和状态信息
      */
-    @PostMapping("/insert")
+    @PostMapping
     public Object insert(@RequestBody ExpensesRecordDto expensesRecordDto) {
         return AjaxResult.SUCCESS(expensesRecordService.insert(StpUtil.getLoginIdAsInt(),
-                Double.parseDouble(expensesRecordDto.getValue()),
+                expensesRecordDto.getLedgerId(),
+               expensesRecordDto.getValue(),
                 expensesRecordDto.getType(),
                 expensesRecordDto.getKind(),
                 expensesRecordDto.getRemark(),
@@ -46,7 +47,7 @@ public class ExpensesRecordController {
      * @param id 消费记录 id
      * @return json数据，包含状态码和状态信息
      */
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public Object delete(@PathVariable int id) {
         expensesRecordService.delete(id, StpUtil.getLoginIdAsInt());
         return AjaxResult.SUCCESS();
@@ -58,7 +59,7 @@ public class ExpensesRecordController {
      * @param expensesRecordDto 新建消费记录有关数据
      * @return json数据，包含状态码和状态信息
      */
-    @PostMapping("/update")
+    @PutMapping
     public Object update(@RequestBody ExpensesRecordDto expensesRecordDto) {
         expensesRecordService.update(expensesRecordDto.getId(),
                 StpUtil.getLoginIdAsInt(),
@@ -80,16 +81,17 @@ public class ExpensesRecordController {
      * @param pageSize 查询的页大小
      * @return json数据，包含状态码和状态信息
      */
-    @GetMapping("/fetch")
+    @GetMapping
     public Object fetch(
             @RequestParam(value = "date", required = false) String date,
             @RequestParam(value = "month", required = false) String month,
             @RequestParam(value = "year", required = false) String year,
             @RequestParam(value = "type", required = false) Boolean type,
             @RequestParam(value = "page_num") Integer pageNum,
-            @RequestParam(value = "page_size") Integer pageSize) {
+            @RequestParam(value = "page_size") Integer pageSize,
+            @RequestParam(value = "ledger_id") Integer ledgerId) {
         return AjaxResult.SUCCESS(expensesRecordService.getPageable(StpUtil.getLoginIdAsInt(),
-                year, month, date, type, pageNum, pageSize));
+                ledgerId, year, month, date, type, pageNum, pageSize));
     }
 
     /**
@@ -99,9 +101,10 @@ public class ExpensesRecordController {
      * @return json数据，包含状态码和状态信息
      */
     @PostMapping("/train_ticket")
-    public Object insertByPhoto(@RequestParam("photo") MultipartFile photo) throws IOException {
+    public Object insertByPhoto(@RequestParam("photo") MultipartFile photo, @RequestParam("ledger_id") Integer ledgerId) throws IOException {
         return AjaxResult.SUCCESS(textInService.insertByTrainTicket(StpUtil.getLoginIdAsInt(),
-                photo.getBytes()));
+                photo.getBytes(),
+                ledgerId));
     }
 
 }

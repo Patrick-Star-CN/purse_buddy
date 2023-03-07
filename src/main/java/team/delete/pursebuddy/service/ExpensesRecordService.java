@@ -11,8 +11,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import team.delete.pursebuddy.constant.ErrorCode;
 import team.delete.pursebuddy.entity.ExpensesRecord;
+import team.delete.pursebuddy.entity.LedgerPermission;
 import team.delete.pursebuddy.exception.AppException;
 import team.delete.pursebuddy.mapper.ExpensesRecordMapper;
+import team.delete.pursebuddy.mapper.LedgerPermissionMapper;
 import team.delete.pursebuddy.util.TimeUtil;
 
 import java.text.ParseException;
@@ -28,22 +30,33 @@ import java.util.*;
 public class ExpensesRecordService {
     final ExpensesRecordMapper expensesRecordMapper;
 
+    final LedgerPermissionMapper ledgerPermissionMapper;
+
     /**
      * 新增消费记录
      */
-    public int insert(int userId, double value, boolean type, String kind, String remark, String dateRaw) {
+    public int insert(int userId, int ledgerId, String value, boolean type, String kind, String remark, String dateRaw) {
         Date date;
+        double val;
         try {
             date = TimeUtil.tranStringToDate(dateRaw);
-        } catch (ParseException e) {
+            val = Double.parseDouble(value);
+        } catch (Exception e) {
             throw new AppException(ErrorCode.PARAM_ERROR);
+        }
+        LedgerPermission ledgerPermission = ledgerPermissionMapper.selectOne(new QueryWrapper<LedgerPermission>()
+                .eq("user_id", userId)
+                .eq("ledger_id", ledgerId));
+        if (ledgerPermission == null) {
+            throw new AppException(ErrorCode.LEDGER_PERMISSION_ERROR);
         }
         ExpensesRecord expensesRecord = ExpensesRecord.builder().userId(userId)
                 .kind(kind)
-                .value(value)
+                .value(val)
                 .date(date)
                 .remark(remark)
-                .type(type).build();
+                .type(type)
+                .ledgerId(ledgerId).build();
         expensesRecordMapper.insert(expensesRecord);
         return expensesRecord.getId();
     }
@@ -92,7 +105,7 @@ public class ExpensesRecordService {
     /**
      * 获取分页后符合条件的消费记录
      */
-    public Map<String, Object> getPageable(int userId, String year, String month, String date, Boolean type, Integer offset, Integer pageSize) {
+    public Map<String, Object> getPageable(int userId, int ledgerId, String year, String month, String date, Boolean type, Integer offset, Integer pageSize) {
         Date startTime = null;
         Date endTime = null;
         try {
@@ -117,9 +130,16 @@ public class ExpensesRecordService {
             e.printStackTrace();
             throw new AppException(ErrorCode.PARAM_ERROR);
         }
+        LedgerPermission ledgerPermission = ledgerPermissionMapper.selectOne(new QueryWrapper<LedgerPermission>()
+                .eq("ledger_id", ledgerId)
+                .eq("user_id", userId));
+        if (ledgerPermission == null) {
+            throw new AppException(ErrorCode.LEDGER_PERMISSION_ERROR);
+        }
         IPage<ExpensesRecord> page = new Page<>(offset, pageSize);
         QueryWrapper<ExpensesRecord> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_id", userId);
+        queryWrapper.eq("ledger_id", ledgerId);
         queryWrapper.eq(type != null, "type", type);
         queryWrapper.ge(startTime != null, "date", startTime);
         queryWrapper.lt(endTime != null, "date", endTime);

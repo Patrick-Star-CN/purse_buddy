@@ -19,17 +19,17 @@ import team.delete.pursebuddy.util.TextInFetch;
 public class TextInService {
     final ExpensesRecordService expensesRecordService;
 
-    public int insertByTrainTicket(int userId, byte[] img) throws JsonProcessingException {
+    public int insertByTrainTicket(int userId, byte[] img, int ledgerId) throws JsonProcessingException {
         Object result = TextInFetch.post(TextInApi.TRAIN_TICKET, img);
         ObjectMapper objectMapper = new ObjectMapper();
         TrainTicketDto trainTicketDto = objectMapper.convertValue(result, TrainTicketDto.class);
-        double value = 0.0;
+        String value = null;
         String departureStation = null;
         String arrivalStation = null;
         String dateRaw = null;
         for (ImageItemDto item : trainTicketDto.getItemList()) {
             if ("price".equals(item.getKey())) {
-                value = Double.parseDouble(item.getValue());
+                value = item.getValue();
             } else if ("departure_date".equals(item.getKey())) {
                 dateRaw = item.getValue().substring(0, 10);
             } else if ("arrival_station".equals(item.getKey())) {
@@ -39,6 +39,6 @@ public class TextInService {
             }
         }
         String remark = departureStation + " 到 " + arrivalStation + " 的火车票";
-        return expensesRecordService.insert(userId, value, true, "traffic", remark, dateRaw);
+        return expensesRecordService.insert(userId, ledgerId, value, true, "traffic", remark, dateRaw);
     }
 }

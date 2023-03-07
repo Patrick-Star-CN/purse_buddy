@@ -19,7 +19,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/pb_db?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: root
-    password: 123456
+    password: root
 
   data:
     redis:

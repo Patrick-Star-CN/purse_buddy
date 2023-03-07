@@ -28,6 +28,10 @@ public class ExpensesRecord implements Comparable<ExpensesRecord> {
      */
     Integer userId;
     /**
+     * 账本id
+     */
+    Integer ledgerId;
+    /**
      * 消费金额
      */
     Double value;

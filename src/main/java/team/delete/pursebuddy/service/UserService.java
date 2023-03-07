@@ -23,11 +23,14 @@ import java.util.regex.Pattern;
  */
 @Service
 @RequiredArgsConstructor
+@Transactional(rollbackForClassName="RuntimeException")
 @CacheConfig(cacheNames = "ExpireOneMin")
 public class UserService {
     final UserMapper userMapper;
 
     final UserInfoMapper userInfoMapper;
+
+    final LedgerService ledgerService;
 
     /**
      * 通过 ID 查询用户
@@ -84,6 +87,7 @@ public class UserService {
                 .gender(gender)
                 .birthday(birthday).build();
         userInfoMapper.insert(userInfo);
+        ledgerService.createDefault(user);
         return userId;
     }
 }

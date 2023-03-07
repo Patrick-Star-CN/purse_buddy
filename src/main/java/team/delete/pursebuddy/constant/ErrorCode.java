@@ -31,7 +31,17 @@ public enum ErrorCode {
     /** 文件类型不支持 */
     FILE_TYPE_ERROR(200306, "文件类型不支持"),
     /** 图片尺寸不符 */
-    IMAGE_MEASUREMENT_ERROR(200306, "图片尺寸不符，图像宽高须介于 20 和 10000（像素）之间"),
+    IMAGE_MEASUREMENT_ERROR(200307, "图片尺寸不符，图像宽高须介于 20 和 10000（像素）之间"),
+    /** 公开账本没有设置密码 */
+    LEDGER_PUBLIC_WITHOUT_PASSWORD_ERROR(200308, "公开账本必须要设置密码"),
+    /** 该账本不存在或无权限操作 */
+    LEDGER_PERMISSION_ERROR(200309, "该账本不存在或无权限操作"),
+    /** 该账本不存在或密码错误 */
+    LEDGER_NOT_PUBLIC_OR_NOT_EXISTS_ERROR(200310, "该账本是私密的或不存在"),
+    /** 账本密码错误 */
+    LEDGER_PASSWORD_ERROR(200311, "账本密码错误"),
+    /** 已经加入该账本 */
+    LEDGER_HAS_JOINED_ERROR(200311, "已经加入该账本"),
 
     /** 非法请求 */
     ILLEGAL_REQUEST(200404, "非法请求"),

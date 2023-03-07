@@ -1,5 +1,8 @@
 package team.delete.pursebuddy.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -8,6 +11,8 @@ import lombok.Data;
  * @version 1.2
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ExpensesRecordDto {
     /**
      * 消费记录 id
@@ -42,4 +47,10 @@ public class ExpensesRecordDto {
      */
     @NotNull(message = "消费日期不能为空")
     String date;
+
+    /**
+     * 账本id
+     */
+    @NotNull(message = "账本id不能为空")
+    Integer ledgerId;
 }

@@ -7,10 +7,11 @@
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/constant/AuthConst.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/service/WeChatService.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/service/TextInService.java
+/Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/dto/LedgerDto.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/dto/ImageItemDto.java
+/Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/service/LedgerService.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/config/SaTokenConfig.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/config/ProfileConfig.java
-/Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/service/VoiceService.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/config/ValidatorConfig.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/entity/UserInfo.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/dto/Code2SessionDto.java
@@ -18,8 +19,10 @@
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/constant/ResponseCode.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/mapper/UserInfoMapper.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/dto/TextInResponse.java
+/Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/mapper/LedgerMapper.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/exception/AppException.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/controller/UserController.java
+/Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/mapper/LedgerPermissionMapper.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/dto/TrainTicketDto.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/util/TimeUtil.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/service/ExpensesRecordService.java
@@ -35,10 +38,13 @@
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/constant/RegexPattern.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/handler/SaExceptionHandler.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/util/IntegerUtil.java
+/Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/controller/LedgerController.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/controller/ExpensesRecordController.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/entity/User.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/handler/CustomExceptionHandler.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/interceptor/LogInterceptor.java
+/Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/entity/LedgerPermission.java
+/Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/entity/Ledger.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/constant/MsgLocalConstant.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/dto/AjaxResult.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/handler/GlobalExceptionHandler.java
