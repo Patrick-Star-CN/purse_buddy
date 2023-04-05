@@ -1,19 +1,18 @@
 package team.delete.pursebuddy.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Builder;
 import lombok.Data;
 
 /**
  * @author Patrick_Star
- * @version 1.1
+ * @version 1.0
  */
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class TextInResponse {
-    private int code;
-    private String message;
-    private Object result;
+public class ProcessImageDto {
+    private String image;
 }

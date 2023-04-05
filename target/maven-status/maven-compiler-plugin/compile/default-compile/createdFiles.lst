@@ -1,6 +1,7 @@
 team/delete/pursebuddy/dto/AjaxResult.class
 team/delete/pursebuddy/dto/ErrorDetail$ErrorDetailBuilder.class
 team/delete/pursebuddy/util/IntegerUtil.class
+team/delete/pursebuddy/dto/ProcessImageDto.class
 team/delete/pursebuddy/dto/LedgerDto.class
 team/delete/pursebuddy/dto/ErrorDetail.class
 team/delete/pursebuddy/constant/AuthConst.class
@@ -12,6 +13,7 @@ team/delete/pursebuddy/service/TextInService.class
 team/delete/pursebuddy/dto/Code2SessionDto.class
 team/delete/pursebuddy/handler/GlobalExceptionHandler.class
 team/delete/pursebuddy/config/MybatisPlusConfig.class
+team/delete/pursebuddy/dto/CropEnhanceImageDto.class
 team/delete/pursebuddy/handler/SaExceptionHandler.class
 team/delete/pursebuddy/mapper/LedgerMapper.class
 team/delete/pursebuddy/config/ValidatorConfig.class
@@ -25,6 +27,8 @@ team/delete/pursebuddy/controller/LedgerController.class
 team/delete/pursebuddy/config/RedisConfig.class
 team/delete/pursebuddy/entity/ExpensesRecord$ExpensesRecordBuilder.class
 team/delete/pursebuddy/constant/RegexPattern.class
+team/delete/pursebuddy/dto/ExpensesRecordDto$ExpensesRecordDtoBuilder.class
+team/delete/pursebuddy/dto/TicketItemDto.class
 team/delete/pursebuddy/config/CustomWebMvcConfig.class
 team/delete/pursebuddy/controller/ExpensesRecordController.class
 team/delete/pursebuddy/config/WechatConfig.class
@@ -42,6 +46,7 @@ team/delete/pursebuddy/service/WeChatService.class
 team/delete/pursebuddy/config/SaTokenConfig.class
 team/delete/pursebuddy/entity/LedgerPermission$LedgerPermissionBuilder.class
 team/delete/pursebuddy/dto/ExpensesRecordDto.class
+team/delete/pursebuddy/dto/ImageDto.class
 team/delete/pursebuddy/service/ExpensesRecordService.class
 team/delete/pursebuddy/controller/UserController.class
 META-INF/spring-configuration-metadata.json
@@ -57,6 +62,7 @@ team/delete/pursebuddy/mapper/UserMapper.class
 team/delete/pursebuddy/mapper/ExpensesRecordMapper.class
 team/delete/pursebuddy/entity/UserInfo.class
 team/delete/pursebuddy/entity/UserInfo$UserInfoBuilder.class
+team/delete/pursebuddy/dto/CropEnhanceDto.class
 team/delete/pursebuddy/constant/ErrorCode.class
 team/delete/pursebuddy/dto/TextInResponse.class
 team/delete/pursebuddy/dto/WechatAccessTokenDto.class

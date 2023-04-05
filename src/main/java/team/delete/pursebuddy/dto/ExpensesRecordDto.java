@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -11,13 +12,14 @@ import lombok.Data;
  * @version 1.2
  */
 @Data
+@Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ExpensesRecordDto {
     /**
      * 消费记录 id
      */
-    int id;
+    Integer id;
 
     /**
      * 收支类型(0: 收入; 1: 支出）

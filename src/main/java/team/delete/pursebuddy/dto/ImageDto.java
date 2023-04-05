@@ -5,15 +5,15 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 
+import java.util.ArrayList;
+
 /**
  * @author Patrick_Star
- * @version 1.1
+ * @version 1.0
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class TextInResponse {
-    private int code;
-    private String message;
-    private Object result;
+public class ImageDto {
+    private ArrayList<ImageItemDto> lines;
 }

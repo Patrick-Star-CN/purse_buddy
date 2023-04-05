@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import team.delete.pursebuddy.config.XTiConfig;
 import team.delete.pursebuddy.constant.ErrorCode;
+import team.delete.pursebuddy.constant.TextInApi;
 import team.delete.pursebuddy.dto.TextInResponse;
 import team.delete.pursebuddy.exception.AppException;
 
@@ -14,7 +15,7 @@ import team.delete.pursebuddy.exception.AppException;
  * 调用合合科技 OCR 接口识别图片的工具
  *
  * @author Patrick_Star
- * @version 1.1
+ * @version 1.2
  */
 public class TextInFetch {
 
@@ -27,6 +28,9 @@ public class TextInFetch {
         headers.add("x-ti-app-id", XTiConfig.getAppid());
         headers.add("x-ti-secret-code", XTiConfig.getSecret());
         headers.add("connection", "Keep-Alive");
+        if (url.equals(TextInApi.CROP_ENHANCE)) {
+            headers.add("correct_direction", "1");
+        }
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         HttpEntity<byte[]> httpEntity = new HttpEntity<>(img, headers);
         ResponseEntity<TextInResponse> resp = getRestTemplate().postForEntity(url, httpEntity, TextInResponse.class);
@@ -41,6 +45,7 @@ public class TextInFetch {
                     throw new AppException(ErrorCode.IMAGE_SIZE_ERROR);
                 }
                 case 40303: {
+                    System.out.println(url);
                     throw new AppException(ErrorCode.FILE_TYPE_ERROR);
                 }
                 case 40304: {

@@ -22,5 +22,5 @@ public class TrainTicketDto {
     private int rotatedImageHeight;
     private String kind;
     private String kindDescription;
-    private ArrayList<ImageItemDto> itemList;
+    private ArrayList<TicketItemDto> itemList;
 }

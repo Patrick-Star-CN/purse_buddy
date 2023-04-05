@@ -12,10 +12,15 @@
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/service/LedgerService.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/config/SaTokenConfig.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/config/ProfileConfig.java
+/Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/dto/CropEnhanceImageDto.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/config/ValidatorConfig.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/entity/UserInfo.java
+/Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/dto/ProcessImageDto.java
+/Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/dto/CropEnhanceDto.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/dto/Code2SessionDto.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/config/WechatConfig.java
+/Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/dto/TicketItemDto.java
+/Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/dto/ImageDto.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/constant/ResponseCode.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/mapper/UserInfoMapper.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/dto/TextInResponse.java

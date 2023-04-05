@@ -29,8 +29,7 @@ public class LedgerController {
     public Object insert(@RequestBody LedgerDto ledgerDto) {
         return AjaxResult.SUCCESS(ledgerService.create(StpUtil.getLoginIdAsInt(),
                 ledgerDto.getName(),
-                ledgerDto.getIsPublic(),
-                ledgerDto.getPassword()));
+                ledgerDto.getIsPublic()));
     }
 
     /**
@@ -53,8 +52,7 @@ public class LedgerController {
         ledgerService.update(StpUtil.getLoginIdAsInt(),
                 ledgerDto.getId(),
                 ledgerDto.getName(),
-                ledgerDto.getIsPublic(),
-                ledgerDto.getPassword());
+                ledgerDto.getIsPublic());
         return AjaxResult.SUCCESS();
     }
 
@@ -73,23 +71,23 @@ public class LedgerController {
     /**
      * 通过名称查询账本信息
      *
-     * @param name 查询的关键词
+     * @param ledgerId 查询的关键词
      * @return json数据，包含状态码和状态信息
      */
     @GetMapping("/query")
-    public Object search(@RequestParam String name) {
-        return AjaxResult.SUCCESS(ledgerService.search(name));
+    public Object search(@RequestParam(value = "ledger_id") Integer ledgerId) {
+        return AjaxResult.SUCCESS(ledgerService.query(StpUtil.getLoginIdAsInt(), ledgerId));
     }
 
     /**
      * 加入账本
      *
-     * @param ledgerDto 新建账本有关数据
+     * @param password 对应账本的密钥
      * @return json数据，包含状态码和状态信息
      */
     @PostMapping("/join")
-    public Object join(@RequestBody LedgerDto ledgerDto) {
-        ledgerService.join(StpUtil.getLoginIdAsInt(), ledgerDto.getId(), ledgerDto.getPassword());
+    public Object join(@RequestParam String password) {
+        ledgerService.join(StpUtil.getLoginIdAsInt(), password);
         return AjaxResult.SUCCESS();
     }
 }

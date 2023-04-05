@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.ArrayList;
+
 /**
  * @author Patrick_Star
  * @version 1.0
@@ -13,9 +15,10 @@ import lombok.Data;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-@Builder
-public class LedgerDto {
-    private int id;
-    private String name;
-    private Boolean isPublic;
+public class CropEnhanceImageDto {
+    private int croppedWidth;
+    private int croppedHeight;
+    private String image;
+    private ArrayList<Integer> position;
+    private int angle;
 }

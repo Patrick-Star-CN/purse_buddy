@@ -18,6 +18,7 @@ import team.delete.pursebuddy.mapper.LedgerPermissionMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author Patrick_Star
@@ -48,15 +49,16 @@ public class LedgerService {
     /**
      * 创建记账本
      */
-    public int create(int userId, String name, boolean isPublic, String password) {
-        if (isPublic && password == null) {
-            throw new AppException(ErrorCode.LEDGER_PUBLIC_WITHOUT_PASSWORD_ERROR);
-        }
+    public int create(int userId, String name, boolean isPublic) {
         Ledger ledger = Ledger.builder()
                 .name(name)
-                .password(password)
                 .isPublic(isPublic)
                 .ownerId(userId).build();
+        String password = null;
+        if (isPublic) {
+            password = String.valueOf(UUID.randomUUID());
+        }
+        ledger.setPassword(password);
         ledgerMapper.insert(ledger);
         ledgerPermissionMapper.insert(LedgerPermission.builder()
                 .ledgerId(ledger.getId())
@@ -84,15 +86,16 @@ public class LedgerService {
     /**
      * 修改用户拥有的账本的资料
      */
-    public void update(int userId, int ledgerId, String name, boolean isPublic, String password) {
+    public void update(int userId, int ledgerId, String name, boolean isPublic) {
         Ledger ledger = ledgerMapper.selectOne(new QueryWrapper<Ledger>()
                 .eq("owner_id", userId)
                 .eq("id", ledgerId));
         if (ledger == null) {
             throw new AppException(ErrorCode.LEDGER_PERMISSION_ERROR);
         }
-        if (isPublic && password == null) {
-            throw new AppException(ErrorCode.LEDGER_PUBLIC_WITHOUT_PASSWORD_ERROR);
+        String password = null;
+        if (isPublic) {
+            password = String.valueOf(UUID.randomUUID());
         }
         ledger.setName(name);
         ledger.setPassword(password);
@@ -116,39 +119,30 @@ public class LedgerService {
     /**
      * 加入公开的账本
      */
-    public void join(int userId, int ledgerId, String password) {
+    public void join(int userId, String password) {
+        Ledger ledger = ledgerMapper.selectOne(new QueryWrapper<Ledger>()
+                .eq("password", password));
+        if (ledger == null || !ledger.getIsPublic()) {
+            throw new AppException(ErrorCode.LEDGER_NOT_PUBLIC_OR_NOT_EXISTS_ERROR);
+        }
         LedgerPermission ledgerPermission = ledgerPermissionMapper.selectOne(new QueryWrapper<LedgerPermission>()
                 .eq("user_id", userId)
-                .eq("ledger_id", ledgerId));
+                .eq("ledger_id", ledger.getId()));
         if (ledgerPermission != null) {
             throw new AppException(ErrorCode.LEDGER_HAS_JOINED_ERROR);
         }
-        Ledger ledger = ledgerMapper.selectOne(new QueryWrapper<Ledger>()
-                .eq("id", ledgerId));
-        if (ledger == null || !ledger.getIsPublic()) {
-            throw new AppException(ErrorCode.LEDGER_NOT_PUBLIC_OR_NOT_EXISTS_ERROR);
-        } else if (!ledger.getPassword().equals(password)) {
-            throw new AppException(ErrorCode.LEDGER_PASSWORD_ERROR);
-        }
         ledgerPermissionMapper.insert(LedgerPermission.builder()
-                .ledgerId(ledgerId)
+                .ledgerId(ledger.getId())
                 .userId(userId).build());
     }
 
-    /**
-     * 通过名称搜索公开的账本
-     */
-    @Cacheable(value = "ExpireOneMin", key = "'search_ledger_'+#ledgerName")
-    public List<LedgerDto> search(String ledgerName) {
-        List<Ledger> ledgers = ledgerMapper.selectList(new QueryWrapper<Ledger>()
-                .eq("is_public", true)
-                .like("name", ledgerName));
-        List<LedgerDto> ledgerList = new ArrayList<>();
-        for (Ledger ledger : ledgers) {
-            ledgerList.add(LedgerDto.builder()
-                    .id(ledger.getId())
-                    .name(ledger.getName()).build());
+    public String query(int userId, int ledgerId) {
+        Ledger ledger = ledgerMapper.selectOne(new QueryWrapper<Ledger>()
+                .eq("owner_id", userId)
+                .eq("id", ledgerId));
+        if (ledger == null) {
+            throw new AppException(ErrorCode.LEDGER_PERMISSION_ERROR);
         }
-        return ledgerList;
+        return ledger.getPassword();
     }
 }

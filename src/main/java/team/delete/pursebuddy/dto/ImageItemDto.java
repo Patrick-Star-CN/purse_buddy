@@ -1,17 +1,14 @@
 package team.delete.pursebuddy.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-
-import java.util.ArrayList;
 
 /**
  * @author Patrick_Star
  * @version 1.0
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ImageItemDto {
-    private String key;
-    private String value;
-    private String description;
-    private ArrayList<Integer> position;
+    private String text;
 }
