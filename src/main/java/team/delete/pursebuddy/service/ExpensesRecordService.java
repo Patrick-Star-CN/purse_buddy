@@ -138,7 +138,6 @@ public class ExpensesRecordService {
         }
         IPage<ExpensesRecord> page = new Page<>(offset, pageSize);
         QueryWrapper<ExpensesRecord> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id", userId);
         queryWrapper.eq("ledger_id", ledgerId);
         queryWrapper.eq(type != null, "type", type);
         queryWrapper.ge(startTime != null, "date", startTime);

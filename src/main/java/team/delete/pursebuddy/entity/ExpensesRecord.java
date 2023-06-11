@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
  * @author Patrick_Star
- * @version 1.2
+ * @version 1.3
  */
 @Data
 @Builder
@@ -31,6 +31,10 @@ public class ExpensesRecord implements Comparable<ExpensesRecord> {
      * 账本id
      */
     Integer ledgerId;
+    /**
+     * 账户id
+     */
+    Integer accountId;
     /**
      * 消费金额
      */
@@ -52,6 +56,11 @@ public class ExpensesRecord implements Comparable<ExpensesRecord> {
      * 消费日期
      */
     Date date;
+
+    /**
+     * 创建日期
+     */
+    Date createDate;
 
     @Override
     public int compareTo(@NotNull ExpensesRecord rhs) {

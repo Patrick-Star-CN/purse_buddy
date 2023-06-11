@@ -21,4 +21,5 @@ public class Ledger {
     @TableField(updateStrategy = FieldStrategy.IGNORED)
     private Boolean isPublic;
     private Integer ownerId;
+    private String template;
 }

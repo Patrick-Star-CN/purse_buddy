@@ -56,19 +56,12 @@ public class TextInService {
         String dateRaw = null;
         Calendar calendar = Calendar.getInstance();
         if (sentence.contains("年") && sentence.contains("月") && sentence.contains("日")) {
-            String year = sentence.split("年", 2)[0];
-            sentence = sentence.substring(year.length() + 1);
-            String month = sentence.split("月", 2)[0];
-            sentence = sentence.substring(month.length() + 1);
-            String day = sentence.split("日", 2)[0];
-            sentence = sentence.substring(day.length() + 1);
-            dateRaw = year + "-" + month + "-" + day;
+            dateRaw = sentence.split("日", 2)[0];
+            dateRaw = dateRaw.replaceFirst("年", "-");
+            dateRaw = dateRaw.replaceFirst("月", "-");
         } else if (sentence.contains("月") && sentence.contains("日")) {
-            String month = sentence.split("月", 2)[0];
-            sentence = sentence.substring(month.length() + 1);
-            String day = sentence.split("日", 2)[0];
-            sentence = sentence.substring(day.length() + 1);
-            dateRaw = calendar.get(Calendar.YEAR) + "-" + month + "-" + day;
+            dateRaw = sentence.split("日", 2)[0];
+            dateRaw = dateRaw.replaceFirst("月", "-");
         } else if (sentence.contains("今天")) {
             sentence = sentence.substring(2);
             dateRaw = calendar.get(Calendar.YEAR) + "-" + (calendar.get(Calendar.MONTH) + 1) + "-" +calendar.get(Calendar.DATE);

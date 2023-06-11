@@ -29,7 +29,8 @@ public class LedgerController {
     public Object insert(@RequestBody LedgerDto ledgerDto) {
         return AjaxResult.SUCCESS(ledgerService.create(StpUtil.getLoginIdAsInt(),
                 ledgerDto.getName(),
-                ledgerDto.getIsPublic()));
+                ledgerDto.getIsPublic(),
+                ledgerDto.getTemplate()));
     }
 
     /**

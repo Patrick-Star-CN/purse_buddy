@@ -18,4 +18,6 @@ public class LedgerDto {
     private int id;
     private String name;
     private Boolean isPublic;
+    private String owner;
+    private String template;
 }

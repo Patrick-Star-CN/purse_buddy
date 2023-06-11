@@ -32,6 +32,8 @@
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/util/TimeUtil.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/service/ExpensesRecordService.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/config/MybatisPlusConfig.java
+/Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/entity/Account.java
+/Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/entity/Budget.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/dto/ExpensesRecordDto.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/constant/CacheType.java
 /Users/patrick_star/Program/purse_buddy/src/main/java/team/delete/pursebuddy/dto/ErrorDetail.java

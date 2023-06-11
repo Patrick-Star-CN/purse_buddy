@@ -41,6 +41,7 @@ team/delete/pursebuddy/constant/MsgLocalConstant.class
 team/delete/pursebuddy/entity/User.class
 team/delete/pursebuddy/constant/TextInApi.class
 team/delete/pursebuddy/constant/ResponseCode.class
+team/delete/pursebuddy/entity/Account.class
 team/delete/pursebuddy/constant/MsgRedisConstant.class
 team/delete/pursebuddy/service/WeChatService.class
 team/delete/pursebuddy/config/SaTokenConfig.class
@@ -52,6 +53,7 @@ team/delete/pursebuddy/controller/UserController.class
 META-INF/spring-configuration-metadata.json
 team/delete/pursebuddy/entity/Ledger.class
 team/delete/pursebuddy/dto/TrainTicketDto.class
+team/delete/pursebuddy/entity/Account$AccountBuilder.class
 team/delete/pursebuddy/entity/Ledger$LedgerBuilder.class
 team/delete/pursebuddy/service/UserService.class
 team/delete/pursebuddy/service/UserInfoService.class
@@ -62,6 +64,7 @@ team/delete/pursebuddy/mapper/UserMapper.class
 team/delete/pursebuddy/mapper/ExpensesRecordMapper.class
 team/delete/pursebuddy/entity/UserInfo.class
 team/delete/pursebuddy/entity/UserInfo$UserInfoBuilder.class
+team/delete/pursebuddy/entity/Budget.class
 team/delete/pursebuddy/dto/CropEnhanceDto.class
 team/delete/pursebuddy/constant/ErrorCode.class
 team/delete/pursebuddy/dto/TextInResponse.class
@@ -69,3 +72,4 @@ team/delete/pursebuddy/dto/WechatAccessTokenDto.class
 team/delete/pursebuddy/mapper/LedgerPermissionMapper.class
 team/delete/pursebuddy/handler/ValidateExceptionHandler.class
 team/delete/pursebuddy/config/XTiConfig.class
+team/delete/pursebuddy/entity/Budget$BudgetBuilder.class
